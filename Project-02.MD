@@ -18,8 +18,8 @@ Enable connection between Ansible and Jenkins
 
 	- SSH Servers:
 		- Hostname:`<ServerIP>`
-		- username: `ansadm`
-		- password: `*******`
+		- username: `ansadmin`
+		- password: `*********`
 		
 Test the connection "Test Connection"
 

@@ -12,7 +12,7 @@ We know how to use work with each and Git, Jenkins independently. What if you wa
 1. Login to Jenkins console
 1. Create *Jenkins job*, Fill the following details,
    - *Source Code Management:*
-      - Repository: `https://github.com/ValaxyTech/hello-world.git`
+      - Repository: `https://github.com/saikrishna2653/crud_examples.git`
       - Branches to build : `*/master`  
    - *Build:*
      - Root POM:`pom.xml`
@@ -24,22 +24,15 @@ in this port we are going to install 'deploy to container' plugin. this is need 
 - Install maven plugin without restart  
   - `Manage Jenkins` > `Jenkins Plugins` > `available` > `deploy to container`
  
-To deploy our build artifacts on tomcat server our Jenkins server need access. For this we should setup credentials. This option is available in Jenkins home page
+To deploy our build artifacts on our Jenkins server need access. For this we should setup credentials. This option is available in Jenkins home page
 
-- setup credentials
-  - `credentials` > `jenkins` > `Global credentials` > `add credentials`
-    - Username	: `deployer`
-    - Password : `XXXXXXX`
-    - id      :  `Tomcat_user`
-    - Description: `Tomcat user to deploy on tomcat server`
-
-Modify the same job which created in part-01 and add deployment steps.
- - Post Steps
-   - Deploy war/ear to container
-      - WAR/EAR files : `**/*.war`
-      - Containers : `Tomcat 8.x`
-         - Credentials: `Tomcat_user` (which created in above step)
-         - Tomcat URL : `http://<PUBLIC_IP>:<PORT_NO>`
+	 
+- *Add post-build steps*
+    - Send files or execute commands over SSH
+      - SSH Server : `my_server`
+      - Source fiels: `**/*.war`
+      - Remote directory:  `//opt//codedeploy`
+      - Exec command: sudo nohup java -jar /opt/codedeploy/crud-0.0.1-SNAPSHOT.war >/dev/null 2>&1 &
 
 Save and run the job now.
 
